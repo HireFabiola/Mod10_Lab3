@@ -8,14 +8,11 @@ export function TodoInput() {
 
     // Declared function 
     function handleAddTodo(){
-
         // Call addTodo to addd inputed Todo item
-        handleAddTodo(){
         addTodo("input");
 
         // Clear out input field after
         setInput("");
-        }
     }
 
     // Create input field with listener
