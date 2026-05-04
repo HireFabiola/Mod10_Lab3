@@ -1,12 +1,13 @@
 
 import './App.css'
+import { TodoInput } from './components/TodoInput'
 
 function App() {
 
 
   return (
     <>
-    Back at it again
+    <TodoInput/>
     </>
   )
 }
