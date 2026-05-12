@@ -1,5 +1,5 @@
 import { useState } from "react";
-import 
+
 
 
 export function TodoInput() {
@@ -8,7 +8,7 @@ export function TodoInput() {
     const [input, setInput] = useState("");
 
     // Declared function 
-    function handleAddTodo(){
+    function handleAddTodo(e) {
         // Call addTodo to addd inputed Todo item
         addTodo("input");
 
