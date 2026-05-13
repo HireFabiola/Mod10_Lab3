@@ -5,14 +5,13 @@ import { TodoList } from './components/TodoList'
 
 
 function App() {
-
-
   return (
-    <TodoProvider>
-    <TodoInput/>
-    <TodoList/>
-    </TodoProvider>
+    <div className="listContainer">
+      < TodoProvider >
+        <TodoInput />
+        <TodoList />
+      </TodoProvider >
+    </div >
   )
 }
-
 export default App

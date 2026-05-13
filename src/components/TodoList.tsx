@@ -1,4 +1,5 @@
 import { useTodos } from "./TodoContext";
+import TodoItem from "./TodoItem";
 
 // Function call to display todo list
 export function TodoList() {
@@ -9,7 +10,7 @@ export function TodoList() {
       <h2>Todo List</h2>
 
       {todos.map((todo) => (
-        <p key={todo.id}>{todo.text}</p>
+        <TodoItem key={todo.id} todo={todo} />
       ))}
     </div>
   );
