@@ -15,4 +15,26 @@ export function TodoProvider({ children }: { children: React.ReactNode }) {
     useEffect(() => {
         localStorage.setItem("todos", JSON.stringify(todos));
     }, [todos]);
+
+    function addTodo(text: string) {
+        // trim white space
+        const trimmedText = text.trim();
+
+        // if empty do nothing
+        if (!trimmedText) return;
+
+        // else create a newTodo object
+        const newTodo: Todo = {
+            id: crypto.randomUUID(),
+            text: trimmedText,
+            completed: false,
+        };
+
+        // set object in setTodo array
+        setTodos([...todos, newTodo]);
+
+        return (
+           <>{children}</>
+        )
+    }
 }
