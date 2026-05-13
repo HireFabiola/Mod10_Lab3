@@ -4,8 +4,11 @@ export interface Todo{
 };
 
 export type TodoContextType = {
-    todos: Todo[];
-    addTodo: (text: string) => void;
+  todos: Todo[];
+  addTodo: (text: string) => void;
+  toggleTodo: (id: string) => void;
+  deleteTodo: (id: string) => void;
+  editTodo: (id: string, newText: string) => void;
 };
 
 export type TodoItemProps = {
