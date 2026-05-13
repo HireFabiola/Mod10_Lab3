@@ -1,40 +1,64 @@
-import { useEffect, useState } from "react";
-import { TodoInput } from "./TodoInput";
-import type { Todo } from "../types";
+import { createContext, useContext, useEffect, useState } from "react";
+import type { Todo, TodoContextType } from "../types";
 
+// Create the TodoContext
+const TodoContext = createContext<TodoContextType | undefined>(undefined);
 
+// Create Provider component
 export function TodoProvider({ children }: { children: React.ReactNode }) {
 
-    // Initialize the state of the todos to whatever is currently stored in localStorage
-    const [todos, setTodos] = useState<Todo[]>(() => {
-        const savedTodos = localStorage.getItem("todos");
-        return savedTodos ? JSON.parse(savedTodos) : [];
-    });
+  // Initialize the state of the todos to whatever is currently stored in localStorage
+  const [todos, setTodos] = useState<Todo[]>(() => {
+    const savedTodos = localStorage.getItem("todos");
 
-    // Trigger setting item in localStoarge when state of todos changes
-    useEffect(() => {
-        localStorage.setItem("todos", JSON.stringify(todos));
-    }, [todos]);
+    return savedTodos ? JSON.parse(savedTodos) : [];
+  });
 
-    function addTodo(text: string) {
-        // trim white space
-        const trimmedText = text.trim();
+  // Trigger setting item in localStorage when state of todos changes
+  useEffect(() => {
+    localStorage.setItem("todos", JSON.stringify(todos));
+  }, [todos]);
 
-        // if empty do nothing
-        if (!trimmedText) return;
+  // Function to add todo item
+  function addTodo(text: string) {
+    console.log(text);
 
-        // else create a newTodo object
-        const newTodo: Todo = {
-            id: crypto.randomUUID(),
-            text: trimmedText,
-            completed: false,
-        };
+    // trim white space
+    const trimmedText = text.trim();
 
-        // set object in setTodo array
-        setTodos([...todos, newTodo]);
+    // if empty do nothing
+    if (!trimmedText) return;
 
-        return (
-           <>{children}</>
-        )
-    }
+    // else create a newTodo object
+    const newTodo: Todo = {
+      id: crypto.randomUUID(),
+      text: trimmedText,
+      completed: false,
+    };
+
+    // set object in setTodo array
+    setTodos([...todos, newTodo]);
+  }
+
+  // Share todos state and addTodo function with child components
+  return (
+    <TodoContext.Provider value={{ todos, addTodo }}>
+      {children}
+    </TodoContext.Provider>
+  );
+}
+
+// Custom hook to access TodoContext
+export function useTodos() {
+
+  // Store TodoContext in variable
+  const context = useContext(TodoContext);
+
+  // If component tries to use context outside Provider throw error
+  if (!context) {
+    throw new Error("useTodos must be used inside TodoProvider");
+  }
+
+  // Return context
+  return context;
 }

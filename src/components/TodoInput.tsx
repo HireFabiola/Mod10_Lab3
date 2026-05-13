@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { useTodos } from "./TodoContext";
+
 
 
 
@@ -7,10 +9,12 @@ export function TodoInput() {
     // Inititalize input to empty string
     const [input, setInput] = useState("");
 
+    const { addTodo } = useTodos();
+    
     // Declared function 
     function handleAddTodo(e) {
         // Call addTodo to addd inputed Todo item
-        addTodo("input");
+        addTodo(input);
 
         // Clear out input field after
         setInput("");
