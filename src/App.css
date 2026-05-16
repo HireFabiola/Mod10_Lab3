@@ -6,3 +6,13 @@
     align-items: center;
 }
 
+
+.listContainer.light {
+  background-color: white;
+  color: black;
+}
+
+.listContainer.dark {
+  background-color: #222;
+  color: white;
+}
