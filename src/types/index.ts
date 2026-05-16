@@ -1,7 +1,9 @@
 
-export interface Todo{
-    text: string,
-};
+export interface Todo {
+  id: string;
+  text: string;
+  completed: boolean;
+}
 
 export type TodoContextType = {
   todos: Todo[];

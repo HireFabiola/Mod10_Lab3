@@ -40,9 +40,35 @@ export function TodoProvider({ children }: { children: React.ReactNode }) {
     setTodos([...todos, newTodo]);
   }
 
-  // Share todos state and addTodo function with child components
+  // Function to toggle completion
+  function toggleTodo(id: string) {
+    setTodos((currentTodos) =>
+      currentTodos.map((todo) =>
+        todo.id === id ? { ...todo, completed: !todo.completed } : todo
+      )
+    );
+  }
+
+  // Function to delete todo item
+  function deleteTodo(id: string) {
+    setTodos((currentTodos) => currentTodos.filter((todo) => todo.id !== id));
+  }
+
+  // Function to edit todo item
+  function editTodo(id: string, newText: string) {
+    const trimmedText = newText.trim();
+    if (!trimmedText) return;
+
+    setTodos((currentTodos) =>
+      currentTodos.map((todo) =>
+        todo.id === id ? { ...todo, text: trimmedText } : todo
+      )
+    );
+  }
+
+  // Share todos state and actions with child components
   return (
-    <TodoContext.Provider value={{ todos, addTodo }}>
+    <TodoContext.Provider value={{ todos, addTodo, toggleTodo, deleteTodo, editTodo }}>
       {children}
     </TodoContext.Provider>
   );

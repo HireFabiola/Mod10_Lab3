@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, type MouseEvent } from "react";
 import { useTodos } from "./TodoContext";
 
 
@@ -12,8 +12,10 @@ export function TodoInput() {
     const { addTodo } = useTodos();
     
     // Declared function 
-    function handleAddTodo(e) {
-        // Call addTodo to addd inputed Todo item
+    function handleAddTodo(e: MouseEvent<HTMLButtonElement>) {
+        e.preventDefault();
+
+        // Call addTodo to add inputted Todo item
         addTodo(input);
 
         // Clear out input field after

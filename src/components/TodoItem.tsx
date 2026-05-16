@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { Todo, useTodos } from "./TodoContext";
-import type { TodoItemProps } from "../types";
+import { useTodos } from "./TodoContext";
+import type { TodoItemProps, Todo } from "../types";
 
 // TodoItem component receives individual todo object as props
 export default function TodoItem({ todo }: TodoItemProps) {
