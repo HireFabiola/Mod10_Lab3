@@ -1,0 +1,13 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* App global overrides */
+html, body, #root {
+	height: 100%;
+}
+
+/* Ensure body uses Tailwind's background by default */
+body {
+	margin: 0;
+}

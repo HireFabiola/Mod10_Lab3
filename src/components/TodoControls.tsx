@@ -1,6 +1,5 @@
 import { useTodos } from './TodoContext'
 import { useFilter } from './FilterContext'
-import { ThemeToggleButton } from './ThemeToggleButton'
 
 export function TodoControls() {
 
@@ -18,7 +17,6 @@ export function TodoControls() {
   return (
 
     <div className="todoControls">
-        <ThemeToggleButton />
 
       {/* Filter Buttons */}
       <div className="filterButtons">
