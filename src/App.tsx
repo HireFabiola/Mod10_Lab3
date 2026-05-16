@@ -3,7 +3,7 @@ import { TodoInput } from './components/TodoInput'
 import { TodoList } from './components/TodoList'
 
 // Import custom context hook
-import { useTodos } from './context/TodoContext'
+import { useTodos } from './components/TodoContext'
 
 function App() {
 
