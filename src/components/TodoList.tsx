@@ -1,15 +1,18 @@
 import { useTodos } from "./TodoContext";
 import { useFilter } from "./FilterContext";
+import { useTheme } from "./ThemeContext";
 import TodoItem from "./TodoItem";
 
 // Function call to display todo list
 export function TodoList() {
 
   // Access todos from TodoContext
-  const { todos } = useTodos();
+  const { todos, clearCompleted } = useTodos();
 
   // Access current visibility filter from FilterContext
   const { filter } = useFilter();
+
+  const { theme } = useTheme();
 
   // Filter todos based on current filter value
   const filteredTodos = todos.filter((todo) => {
@@ -28,14 +31,26 @@ export function TodoList() {
     return true;
   });
 
+  const hasCompletedTodos = todos.some((todo) => todo.completed);
+
   return (
     <div>
-      <h2>Todo List</h2>
-
       {/* Render filtered todo list */}
       {filteredTodos.map((todo) => (
         <TodoItem key={todo.id} todo={todo} />
       ))}
+
+      {hasCompletedTodos && (
+        <div className="mt-4 text-center">
+          <span
+            onClick={clearCompleted}
+            role="button"
+            className={`text-sm cursor-pointer ${theme === 'light' ? 'text-red-600' : 'text-red-300'}`}
+          >
+            Clear Completed
+          </span>
+        </div>
+      )}
     </div>
   );
 }

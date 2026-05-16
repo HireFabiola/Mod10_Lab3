@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useTodos } from "./TodoContext";
+import { useTheme } from "./ThemeContext";
 import type { TodoItemProps, Todo } from "../types";
 
 // TodoItem component receives individual todo object as props
@@ -10,6 +11,8 @@ export default function TodoItem({ todo }: TodoItemProps) {
 
   // Track whether user is currently editing todo item
   const [isEditing, setIsEditing] = useState(false);
+
+  const { theme } = useTheme();
 
   // Store edited text in state
   const [editText, setEditText] = useState(todo.text);
@@ -41,17 +44,17 @@ return (
           type="text"
           value={editText}
           onChange={(event) => setEditText(event.target.value)}
-          className="flex-1 border rounded px-3 py-2"
+          className={`flex-1 border rounded px-3 py-2 ${theme === 'light' ? 'text-black bg-white' : 'text-white bg-gray-700'}`}
         />
 
-        <button type="submit" className="border rounded px-3 py-2">
+        <button type="submit" className={`border rounded px-3 py-2 ${theme === 'light' ? 'bg-blue-500 text-white' : 'bg-indigo-600 text-white'}`}>
           Save
         </button>
 
         <button
           type="button"
           onClick={() => setIsEditing(false)}
-          className="border rounded px-3 py-2"
+          className={`border rounded px-3 py-2 ${theme === 'light' ? '' : 'bg-gray-600 text-white'}`}
         >
           Cancel
         </button>
@@ -69,13 +72,7 @@ return (
             onChange={() => toggleTodo(todo.id)}
           />
 
-          <span
-            className={
-              todo.completed
-                ? "completed line-through text-gray-400"
-                : ""
-            }
-          >
+          <span className={todo.completed ? "completed line-through text-gray-400" : (theme === 'light' ? 'text-black' : 'text-white')}>
             {todo.text}
           </span>
         </label>

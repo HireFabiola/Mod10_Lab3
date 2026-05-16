@@ -1,5 +1,6 @@
 import { useState, type MouseEvent } from "react";
 import { useTodos } from "./TodoContext";
+import { useTheme } from "./ThemeContext";
 
 
 
@@ -10,6 +11,7 @@ export function TodoInput() {
     const [input, setInput] = useState("");
 
     const { addTodo } = useTodos();
+    const { theme } = useTheme();
     
     // Declared function 
     function handleAddTodo(e: MouseEvent<HTMLButtonElement>) {
@@ -31,7 +33,7 @@ return (
       placeholder="Add a todo..."
       value={input}
       onChange={(e) => setInput(e.target.value)}
-      className="flex-1 border border-r-0 rounded-l px-3 py-2"
+      className={`flex-1 border border-r-0 rounded-l px-3 py-2 ${theme === 'light' ? 'text-black bg-white' : 'text-white bg-gray-700'}`}
     />
 
     <button
