@@ -27,70 +27,79 @@ export default function TodoItem({ todo }: TodoItemProps) {
     setIsEditing(false);
   }
 
-  return (
-    <li className="todo-item">
+return (
+  <li className="todo-item flex items-center justify-between gap-4 border rounded px-4 py-3 mb-2">
 
-      {/* Conditional rendering:
-          If editing is true show edit form
-          Otherwise show normal todo item
-      */}
+    {isEditing ? (
 
-      {isEditing ? (
+      // Edit form
+      <form
+        className="edit-form flex w-full items-center gap-2"
+        onSubmit={handleEditSubmit}
+      >
+        <input
+          type="text"
+          value={editText}
+          onChange={(event) => setEditText(event.target.value)}
+          className="flex-1 border rounded px-3 py-2"
+        />
 
-        // Edit form
-        <form className="edit-form" onSubmit={handleEditSubmit}>
+        <button type="submit" className="border rounded px-3 py-2">
+          Save
+        </button>
 
-          {/* Controlled input field */}
+        <button
+          type="button"
+          onClick={() => setIsEditing(false)}
+          className="border rounded px-3 py-2"
+        >
+          Cancel
+        </button>
+      </form>
+
+    ) : (
+
+      <>
+        {/* Left side: checkbox + todo text */}
+        <label className="todo-text flex items-center gap-3 flex-1">
+
           <input
-            type="text"
-            value={editText}
-            onChange={(event) => setEditText(event.target.value)}
+            type="checkbox"
+            checked={todo.completed}
+            onChange={() => toggleTodo(todo.id)}
           />
 
-          {/* Save edited todo */}
-          <button type="submit">Save</button>
+          <span
+            className={
+              todo.completed
+                ? "completed line-through text-gray-400"
+                : ""
+            }
+          >
+            {todo.text}
+          </span>
+        </label>
 
-          {/* Exit edit mode without saving */}
-          <button type="button" onClick={() => setIsEditing(false)}>
-            Cancel
+        {/* Right side: action buttons */}
+        <div className="todo-actions flex items-center gap-2">
+
+          <button
+            onClick={() => setIsEditing(true)}
+            className="border rounded px-3 py-1"
+          >
+            Edit
           </button>
-        </form>
 
-      ) : (
+          <button
+            onClick={() => deleteTodo(todo.id)}
+            className="border rounded px-3 py-1"
+          >
+            Delete
+          </button>
 
-        // Default todo display
-        <>
-          <label className="todo-text">
-
-            {/* Checkbox toggles completed state */}
-            <input
-              type="checkbox"
-              checked={todo.completed}
-              onChange={() => toggleTodo(todo.id)}
-            />
-
-            {/* Add completed class if todo is completed */}
-            <span className={todo.completed ? "completed" : ""}>
-              {todo.text}
-            </span>
-          </label>
-
-          {/* Action buttons */}
-          <div className="todo-actions">
-
-            {/* Turn on edit mode */}
-            <button onClick={() => setIsEditing(true)}>
-              Edit
-            </button>
-
-            {/* Delete todo item */}
-            <button onClick={() => deleteTodo(todo.id)}>
-              Delete
-            </button>
-
-          </div>
-        </>
-      )}
-    </li>
-  );
+        </div>
+      </>
+    )}
+  </li>
+);
 }
