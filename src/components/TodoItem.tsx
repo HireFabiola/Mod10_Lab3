@@ -31,7 +31,7 @@ export default function TodoItem({ todo }: TodoItemProps) {
   }
 
 return (
-  <li className="todo-item flex items-center justify-between gap-4 border rounded px-4 py-3 mb-2">
+  <li className="todo-item flex items-center justify-between gap-4 px-4 py-3 mb-2">
 
     {isEditing ? (
 
@@ -77,21 +77,23 @@ return (
           </span>
         </label>
 
-        {/* Right side: action buttons */}
-        <div className="todo-actions flex items-center gap-2">
+        {/* Right side: action text */}
+        <div className="todo-actions flex items-center gap-4">
 
           <button
             onClick={() => setIsEditing(true)}
-            className="border rounded px-3 py-1"
+            aria-label="Edit todo"
+            className="text-sky-600 hover:text-sky-800 focus:outline-none"
           >
-            Edit
+            ✏️
           </button>
 
           <button
             onClick={() => deleteTodo(todo.id)}
-            className="border rounded px-3 py-1"
+            aria-label="Delete todo"
+            className="text-red-600 hover:text-red-800 focus:outline-none"
           >
-            Delete
+            🗑️
           </button>
 
         </div>
