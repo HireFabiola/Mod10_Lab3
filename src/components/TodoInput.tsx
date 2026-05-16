@@ -22,13 +22,26 @@ export function TodoInput() {
         setInput("");
     }
 
-    // Create input field with listener
-    return (
-        <div className="inputField" >
-            <input type="text" placeholder="Add a todo..." value={input} onChange={(e) => setInput(e.target.value)} />
-            <button onClick={handleAddTodo}>Add Todo</button>
-        </div>
+    // Create input field and add button to submit new todo item
+return (
+  <div className="mb-4 flex">
 
-    )
+    <input
+      type="text"
+      placeholder="Add a todo..."
+      value={input}
+      onChange={(e) => setInput(e.target.value)}
+      className="flex-1 border border-r-0 rounded-l px-3 py-2"
+    />
+
+    <button
+      onClick={handleAddTodo}
+      className="bg-blue-500 text-white px-4 py-2 rounded-r"
+    >
+      Add Todo
+    </button>
+
+  </div>
+)
 
 }
