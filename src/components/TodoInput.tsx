@@ -1,4 +1,4 @@
-import { useState, type MouseEvent } from "react";
+import { useState, type FormEvent } from "react";
 import { useTodos } from "./TodoContext";
 import { useTheme } from "./ThemeContext";
 
@@ -13,8 +13,8 @@ export function TodoInput() {
     const { addTodo } = useTodos();
     const { theme } = useTheme();
     
-    // Declared function 
-    function handleAddTodo(e: MouseEvent<HTMLButtonElement>) {
+    // Handle form submit for both Enter key and button click
+    function handleAddTodo(e: FormEvent<HTMLFormElement>) {
         e.preventDefault();
 
         // Call addTodo to add inputted Todo item
@@ -26,7 +26,7 @@ export function TodoInput() {
 
     // Create input field and add button to submit new todo item
 return (
-  <div className="mb-4 flex">
+  <form className="mb-4 flex w-full" onSubmit={handleAddTodo}>
 
     <input
       type="text"
@@ -37,13 +37,13 @@ return (
     />
 
     <button
-      onClick={handleAddTodo}
+      type="submit"
       className="bg-blue-500 text-white px-4 py-2 rounded-r"
     >
       Add Todo
     </button>
 
-  </div>
+  </form>
 )
 
 }
