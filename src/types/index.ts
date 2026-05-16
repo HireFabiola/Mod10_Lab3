@@ -11,6 +11,7 @@ export type TodoContextType = {
   toggleTodo: (id: string) => void;
   deleteTodo: (id: string) => void;
   editTodo: (id: string, newText: string) => void;
+  clearCompleted: () => void;
 };
 
 export type TodoItemProps = {
