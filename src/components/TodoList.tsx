@@ -3,31 +3,14 @@ import { useFilter } from "./FilterContext";
 import { useTheme } from "./ThemeContext";
 import TodoItem from "./TodoItem";
 
-// Function call to display todo list
 export function TodoList() {
-
-  // Access todos from TodoContext
   const { todos, clearCompleted } = useTodos();
-
-  // Access current visibility filter from FilterContext
   const { filter } = useFilter();
-
   const { theme } = useTheme();
 
-  // Filter todos based on current filter value
   const filteredTodos = todos.filter((todo) => {
-
-    // Show only active todos
-    if (filter === "active") {
-      return !todo.completed;
-    }
-
-    // Show only completed todos
-    if (filter === "completed") {
-      return todo.completed;
-    }
-
-    // Default: show all todos
+    if (filter === "active") return !todo.completed;
+    if (filter === "completed") return todo.completed;
     return true;
   });
 
@@ -35,7 +18,6 @@ export function TodoList() {
 
   return (
     <div>
-      {/* Render filtered todo list */}
       {filteredTodos.map((todo) => (
         <TodoItem key={todo.id} todo={todo} />
       ))}

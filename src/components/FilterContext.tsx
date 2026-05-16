@@ -1,13 +1,16 @@
 import { createContext, useContext, useState } from "react";
 import type { ReactNode } from "react";
-import type { Filter, FilterContextType } from "../types";
 
-// Create context
+type Filter = "all" | "active" | "completed";
+
+type FilterContextType = {
+  filter: Filter;
+  setFilter: (filter: Filter) => void;
+};
+
 const FilterContext = createContext<FilterContextType | undefined>(undefined);
 
-// Provider component
 export function FilterProvider({ children }: { children: ReactNode }) {
-  // Default filter shows all todos
   const [filter, setFilter] = useState<Filter>("all");
 
   return (
@@ -17,7 +20,6 @@ export function FilterProvider({ children }: { children: ReactNode }) {
   );
 }
 
-// Custom hook
 export function useFilter() {
   const context = useContext(FilterContext);
 
