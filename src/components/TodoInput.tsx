@@ -27,7 +27,6 @@ export function TodoInput() {
         <div className="inputField" >
             <input type="text" placeholder="Add a todo..." value={input} onChange={(e) => setInput(e.target.value)} />
             <button onClick={handleAddTodo}>Add Todo</button>
-            <p>Input: {input}</p>
         </div>
 
     )
